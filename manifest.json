@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "description": "SWING 과제 채점을 위한 티스토리 보호글 해제 매크로",
 
-  "permissions": ["storage", "scripting"],
+  "permissions": ["storage"],
   "host_permissions": ["*://*.tistory.com/*"],
 
   "background": {
