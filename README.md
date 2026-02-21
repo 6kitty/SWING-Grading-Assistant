@@ -305,7 +305,7 @@ tistory-autofill/
 <table>
     <tr height="140px">
         <td align="center" width="130px">
-            <a href="https://github.com/6kitty"><img height="100px" width="100px"  src="https://avatars.githubusercontent.com" alt="6kitty"/></a>
+            <a href="https://github.com/6kitty"><img height="100px" width="100px" src="https://avatars.githubusercontent.com/u/170162084?v=4"/></a>
             <br />
             <a href="https://github.com/6kitty">6kitty</a>
         </td>
