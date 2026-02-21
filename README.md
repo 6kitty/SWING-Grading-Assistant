@@ -300,23 +300,14 @@ tistory-autofill/
 
 ---
 
-## Roadmap
-
-- [ ] 다중 블로그 계정 지원 (ID별 보호글 비밀번호 분리)
-- [ ] 아이콘 및 브랜드 에셋 추가
-- [ ] Chrome Web Store 배포
-- [ ] Firefox 포팅 (WebExtensions API 호환)
-
----
-
 ## Author
 
-**Your Name**
-- GitHub: [@your-username](https://github.com/your-username)
-- Blog: [your-blog.tistory.com](https://your-blog.tistory.com)
-
----
-
-<p align="center">
-  Made with Vanilla JS — No frameworks were harmed in the making of this extension.
-</p>
+<table>
+    <tr height="140px">
+        <td align="center" width="130px">
+            <a href="https://github.com/6kitty"><img height="100px" width="100px"  src="https://avatars.githubusercontent.com" alt="6kitty"/></a>
+            <br />
+            <a href="https://github.com/6kitty">6kitty</a>
+        </td>
+    </tr>
+</table>
