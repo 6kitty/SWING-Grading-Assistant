@@ -1,4 +1,4 @@
-# 🔐 Tistory AutoFill — 티스토리 보호글 비밀번호 자동 입력기
+# Tistory AutoFill — 티스토리 보호글 비밀번호 자동 입력기
 
 > **Chrome Extension (Manifest V3)** | 브라우저 내장 Web Crypto API로 비밀번호를 암호화 보관하고, 티스토리 보호글 페이지 진입 시 자동으로 비밀번호를 입력·제출하는 보안 중심 확장 프로그램
 
@@ -9,29 +9,27 @@
 
 ---
 
-## 📸 Preview
+## Preview
 
-> _스크린샷 / 데모 GIF를 여기에 삽입하세요_
-
-| 초기 설정 | 잠금 해제 | 활성화 상태 |
+| 초기 설정 | 활성화 상태 | 블로그 추가 |
 |:---:|:---:|:---:|
-| ![setup](docs/setup.png) | ![unlock](docs/unlock.png) | ![main](docs/main.png) |
+| ![setup](images/스크린샷%202026-02-21%20151204.png) | ![main](images/스크린샷%202026-02-21%20151357.png) | ![add](images/screenshot_1280x800.png) |
 
 ---
 
-## ✨ Key Features — 왜 이 확장 프로그램인가?
+## Key Features
 
 | Feature | 사용자 가치 |
 |---|---|
-| 🔒 **마스터 비밀번호 기반 암호화** | 비밀번호를 평문으로 저장하지 않습니다. PBKDF2로 도출한 키로 AES-GCM 암호화하여 기기 도난·악성 확장 프로그램으로부터 보호 |
-| ⚡ **1-Click 자동 입력 & 제출** | 보호글 페이지 진입 즉시 비밀번호 입력 → 0.5초 후 자동 제출. 매번 비밀번호를 찾아 입력하는 번거로움 제거 |
-| 🧠 **세션 기반 잠금/해제** | 브라우저가 열려 있는 동안만 복호화 상태 유지(`storage.session`). 브라우저 종료 = 자동 잠금 |
-| 🔍 **패턴 매칭 DOM 탐지** | 티스토리 고유 ID 패턴(`entry{N}password`) + MutationObserver로 동적 DOM 변경까지 감지 |
-| 🚫 **Zero External Dependency** | 외부 라이브러리 전혀 없음. 순수 Vanilla JS + 브라우저 내장 API만 사용 |
+| **마스터 비밀번호 기반 암호화** | 비밀번호를 평문으로 저장하지 않습니다. PBKDF2로 도출한 키로 AES-GCM 암호화하여 기기 도난·악성 확장 프로그램으로부터 보호 |
+| **1-Click 자동 입력 & 제출** | 보호글 페이지 진입 즉시 비밀번호 입력 → 0.5초 후 자동 제출. 매번 비밀번호를 찾아 입력하는 번거로움 제거 |
+| **세션 기반 잠금/해제** | 브라우저가 열려 있는 동안만 복호화 상태 유지(`storage.session`). 브라우저 종료 = 자동 잠금 |
+| **패턴 매칭 DOM 탐지** | 티스토리 고유 ID 패턴(`entry{N}password`) + MutationObserver로 동적 DOM 변경까지 감지 |
+| **Zero External Dependency** | 외부 라이브러리 전혀 없음. 순수 Vanilla JS + 브라우저 내장 API만 사용 |
 
 ---
 
-## 🏗️ Architecture — 시스템 구조
+## Architecture
 
 ### 전체 데이터 흐름
 
@@ -99,7 +97,7 @@ tistory-autofill/
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 ### Core
 
@@ -121,7 +119,7 @@ Authentication : AES-GCM 내장 인증 태그 — 변조 탐지 자동 포함
 
 ---
 
-## 🧩 Technical Decisions & Challenges
+## Technical Decisions & Challenges
 
 ### 1. 왜 `AES-GCM`인가? — 인증 암호화의 선택
 
@@ -161,14 +159,14 @@ try {
 **Solution:** `button.click()`을 통해 버튼 자체를 클릭 — 버튼의 `onclick` 핸들러는 **page world에서 실행**되므로 `reloadEntry(N)`이 정상 호출됩니다. 버튼을 찾지 못한 경우 `onkeydown` Enter 이벤트를 폴백으로 dispatch합니다.
 
 ```js
-// content.js — ① 우선: 버튼 직접 클릭 (page world에서 reloadEntry 실행)
+// content.js — 우선: 버튼 직접 클릭 (page world에서 reloadEntry 실행)
 const btn = parent?.querySelector('button[type="button"]') ?? document.querySelector('button.media_btn');
 if (btn) {
-  btn.click(); // onclick → reloadEntry(N) ✅
+  btn.click(); // onclick → reloadEntry(N)
   return;
 }
 
-// ② 폴백: onkeydown Enter 이벤트 (버튼을 찾지 못한 경우)
+// 폴백: onkeydown Enter 이벤트 (버튼을 찾지 못한 경우)
 pwInput.dispatchEvent(
   new KeyboardEvent('keydown', { key: 'Enter', keyCode: 13, bubbles: true, cancelable: true })
 );
@@ -220,7 +218,7 @@ try {
 
 ---
 
-## 🚀 Getting Started — 로컬 설치 및 실행
+## Getting Started
 
 ### Prerequisites
 - Google Chrome 102 이상 (`chrome.storage.session` API 요구)
@@ -256,20 +254,20 @@ cd tistory-autofill
 
 ---
 
-## 🔒 Security Considerations
+## Security Considerations
 
 ```
-✅ 평문 비밀번호는 chrome.storage.local에 저장되지 않음
-✅ 마스터 비밀번호는 어디에도 저장되지 않음 (키 도출 후 즉시 GC)
-✅ 브라우저 종료 시 chrome.storage.session 자동 파기
-✅ AES-GCM 인증 태그로 저장 데이터 무결성 검증
-✅ 각 저장 시마다 새로운 Salt + IV 생성 (재사용 없음)
-⚠️  마스터 비밀번호 분실 시 복구 불가 (의도된 설계)
+[O] 평문 비밀번호는 chrome.storage.local에 저장되지 않음
+[O] 마스터 비밀번호는 어디에도 저장되지 않음 (키 도출 후 즉시 GC)
+[O] 브라우저 종료 시 chrome.storage.session 자동 파기
+[O] AES-GCM 인증 태그로 저장 데이터 무결성 검증
+[O] 각 저장 시마다 새로운 Salt + IV 생성 (재사용 없음)
+[!] 마스터 비밀번호 분실 시 복구 불가 (의도된 설계)
 ```
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 tistory-autofill/
@@ -302,7 +300,7 @@ tistory-autofill/
 
 ---
 
-## 🗺️ Roadmap
+## Roadmap
 
 - [ ] 다중 블로그 계정 지원 (ID별 보호글 비밀번호 분리)
 - [ ] 아이콘 및 브랜드 에셋 추가
@@ -311,7 +309,7 @@ tistory-autofill/
 
 ---
 
-## 👤 Author
+## Author
 
 **Your Name**
 - GitHub: [@your-username](https://github.com/your-username)
@@ -320,5 +318,5 @@ tistory-autofill/
 ---
 
 <p align="center">
-  Made with 🔐 and Vanilla JS — No frameworks were harmed in the making of this extension.
+  Made with Vanilla JS — No frameworks were harmed in the making of this extension.
 </p>
